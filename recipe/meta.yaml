@@ -220,7 +220,7 @@ source:
     folder: source-mingw-w64-ucrt-x86_64-binutils
 
 build:
-  number: 0
+  number: 1
   error_overlinking: false
 
 outputs:
@@ -258,10 +258,13 @@ outputs:
     version: 9.0.0.6454.b4445ee52.1
     script: install_pkg.bat  # [build_platform.startswith("win-")]
     script: install_pkg.sh   # [not build_platform.startswith("win-")]
+    build:
+      noarch: generic
     requirements:
       host:
-
       run:
+        - __unix   # [unix]
+        - __win    # [win]
 
     about:
       home: https://mingw-w64.sourceforge.io/
@@ -374,6 +377,8 @@ outputs:
     version: 9.0.0.6454.b4445ee52.1
     script: install_pkg.bat  # [build_platform.startswith("win-")]
     script: install_pkg.sh   # [not build_platform.startswith("win-")]
+    build:
+      noarch: generic
     requirements:
       host:
         - mingw-w64-ucrt-x86_64-crt-git
@@ -381,6 +386,8 @@ outputs:
       run:
         - mingw-w64-ucrt-x86_64-crt-git
         - mingw-w64-ucrt-x86_64-libwinpthread-git =9.0.0.6454.b4445ee52
+        - __unix   # [unix]
+        - __win    # [win]
     about:
       home: https://mingw-w64.sourceforge.io/
       license: MIT
@@ -391,10 +398,13 @@ outputs:
     version: 6.4.4
     script: install_pkg.bat  # [build_platform.startswith("win-")]
     script: install_pkg.sh   # [not build_platform.startswith("win-")]
+    build:
+      noarch: generic
     requirements:
       host:
-
       run:
+        - __unix   # [unix]
+        - __win    # [win]
 
     about:
       home: https://cygwin.com/
@@ -485,10 +495,13 @@ outputs:
     version: 9.0.0.6454.b4445ee52.1
     script: install_pkg.bat  # [build_platform.startswith("win-")]
     script: install_pkg.sh   # [not build_platform.startswith("win-")]
+    build:
+      noarch: generic
     requirements:
       host:
-
       run:
+        - __unix   # [unix]
+        - __win    # [win]
 
     about:
       home: https://mingw-w64.sourceforge.io/
@@ -500,11 +513,15 @@ outputs:
     version: 9.0.0.6454.b4445ee52.1
     script: install_pkg.bat  # [build_platform.startswith("win-")]
     script: install_pkg.sh   # [not build_platform.startswith("win-")]
+    build:
+      noarch: generic
     requirements:
       host:
         - mingw-w64-ucrt-x86_64-headers-git
       run:
         - mingw-w64-ucrt-x86_64-headers-git
+        - __unix   # [unix]
+        - __win    # [win]
     about:
       home: https://mingw-w64.sourceforge.io/
       license: custom
@@ -525,6 +542,19 @@ outputs:
       license: GPL-3.0-or-later AND GPL-2.0-or-later AND LGPL-3.0-or-later AND LGPL-2.0-or-later
       summary: |
         A set of programs to assemble and manipulate binary and object files (mingw-w64)
+
+  - name: m2w64-sysroot_win-64
+    version: 9.0.0.6454.b4445ee52.1
+    build:
+      noarch: generic
+    requirements:
+      run:
+        - mingw-w64-ucrt-x86_64-windows-default-manifest
+        - mingw-w64-ucrt-x86_64-crt-git
+        - mingw-w64-ucrt-x86_64-headers-git
+        - __unix   # [unix]
+        - __win    # [win]
+
 
 about:
   home: https://github.com/conda-forge/m2w64-gcc-feedstock
