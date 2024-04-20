@@ -258,10 +258,13 @@ outputs:
     version: 9.0.0.6454.b4445ee52.1
     script: install_pkg.bat  # [build_platform.startswith("win-")]
     script: install_pkg.sh   # [not build_platform.startswith("win-")]
+    build:
+      noarch: generic
     requirements:
       host:
-
       run:
+        - __unix   # [unix]
+        - __win    # [win]
 
     about:
       home: https://mingw-w64.sourceforge.io/
@@ -374,6 +377,8 @@ outputs:
     version: 9.0.0.6454.b4445ee52.1
     script: install_pkg.bat  # [build_platform.startswith("win-")]
     script: install_pkg.sh   # [not build_platform.startswith("win-")]
+    build:
+      noarch: generic
     requirements:
       host:
         - mingw-w64-ucrt-x86_64-crt-git
@@ -381,6 +386,8 @@ outputs:
       run:
         - mingw-w64-ucrt-x86_64-crt-git
         - mingw-w64-ucrt-x86_64-libwinpthread-git =9.0.0.6454.b4445ee52
+        - __unix   # [unix]
+        - __win    # [win]
     about:
       home: https://mingw-w64.sourceforge.io/
       license: MIT
@@ -395,8 +402,9 @@ outputs:
       noarch: generic
     requirements:
       host:
-
       run:
+        - __unix   # [unix]
+        - __win    # [win]
 
     about:
       home: https://cygwin.com/
@@ -491,8 +499,9 @@ outputs:
       noarch: generic
     requirements:
       host:
-
       run:
+        - __unix   # [unix]
+        - __win    # [win]
 
     about:
       home: https://mingw-w64.sourceforge.io/
@@ -511,6 +520,8 @@ outputs:
         - mingw-w64-ucrt-x86_64-headers-git
       run:
         - mingw-w64-ucrt-x86_64-headers-git
+        - __unix   # [unix]
+        - __win    # [win]
     about:
       home: https://mingw-w64.sourceforge.io/
       license: custom
@@ -541,6 +552,8 @@ outputs:
         - mingw-w64-ucrt-x86_64-windows-default-manifest
         - mingw-w64-ucrt-x86_64-crt-git
         - mingw-w64-ucrt-x86_64-headers-git
+        - __unix   # [unix]
+        - __win    # [win]
 
 
 about:
