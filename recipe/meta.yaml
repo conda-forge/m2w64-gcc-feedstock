@@ -220,7 +220,7 @@ source:
     folder: source-mingw-w64-ucrt-x86_64-binutils
 
 build:
-  number: 1
+  number: 2
   error_overlinking: false
 
 outputs:
@@ -552,6 +552,7 @@ outputs:
         - mingw-w64-ucrt-x86_64-windows-default-manifest
         - mingw-w64-ucrt-x86_64-crt-git
         - mingw-w64-ucrt-x86_64-headers-git
+        - mingw-w64-ucrt-x86_64-winpthreads-git
         - __unix   # [unix]
         - __win    # [win]
 
