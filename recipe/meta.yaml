@@ -220,7 +220,7 @@ source:
     folder: source-mingw-w64-ucrt-x86_64-binutils
 
 build:
-  number: 2
+  number: 3
   error_overlinking: false
 
 outputs:
