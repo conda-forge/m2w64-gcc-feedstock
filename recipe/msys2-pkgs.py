@@ -21,7 +21,7 @@ source_url = (
 
 pkg_prefix = "mingw-w64-ucrt-x86_64-"
 
-to_process = set([f"{pkg_prefix}gcc", f"{pkg_prefix}gcc-fortran", f"{pkg_prefix}tools-git"])
+to_process = set([f"{pkg_prefix}crt", f"{pkg_prefix}winpthreads", f"{pkg_prefix}headers", f"{pkg_prefix}windows-default-manifest"])
 
 provides = {
   f"{pkg_prefix}winpthreads": f"{pkg_prefix}winpthreads-git",
@@ -136,6 +136,7 @@ def get_depends(pkg):
 
 while to_process:
     pkg = to_process.pop()
+    pkg = provides.get(pkg, pkg)
     depends, spdx, desc, url, src_name = get_depends(pkg)
     for i, full_dep in enumerate(depends):
         dep = full_dep.split(">")[0].split("=")[0].split("<")[0]
@@ -215,7 +216,7 @@ meta += "".join(sources.keys())
 
 meta += """
 build:
-  number: 0
+  number: 4
   error_overlinking: false
 
 outputs:"""
@@ -225,10 +226,14 @@ output_template = """
     version: {{ version }}
     script: install_pkg.bat  # [build_platform.startswith("win-")]
     script: install_pkg.sh   # [not build_platform.startswith("win-")]
+    build:
+      noarch: generic
     requirements:
       host:
 {{ depends }}
       run:
+        - __unix   # [unix]
+        - __win    # [win]
 {{ depends }}
     about:
       home: {{ url }}
@@ -240,13 +245,16 @@ output_template = """
 
 dep_map = {}
 
+def get_version_from_info(info):
+    return ".".join(info.split("-")[:2]).replace("~", "!")
+
 for pkg, (depends, spdx, desc, url, src_url) in seen.items():
     print(f"{pkg} {pkg_latest_ver[pkg]} {' '.join(depends)}")
     info = pkg_latest_ver[pkg]
     text = output_template
     info = {
         "name": pkg.lower(),
-        "version": ".".join(info.split("-")[:2]).replace("~", "!"),
+        "version": get_version_from_info(info),
         "depends": "\n".join(f"        - {dep.lower()}" for dep in depends),
         "license": spdx,
         "summary": desc,
@@ -259,7 +267,26 @@ for pkg, (depends, spdx, desc, url, src_url) in seen.items():
 
 # print(dep_map)
 
-meta += """
+sysroot_version = get_version_from_info(pkg_latest_ver["mingw-w64-ucrt-x86_64-crt-git"])
+
+meta += f"""
+  - name: m2w64-sysroot_win-64
+    version: {sysroot_version}
+    build:
+      noarch: generic
+    requirements:
+      run:
+        - __unix   # [unix]
+        - __win    # [win]
+        - mingw-w64-ucrt-x86_64-windows-default-manifest
+        - mingw-w64-ucrt-x86_64-crt-git
+        - mingw-w64-ucrt-x86_64-headers-git
+        - mingw-w64-ucrt-x86_64-winpthreads-git
+    about:
+      home: https://mingw-w64.sourceforge.io/
+      summary: |
+        MinGW-w64 sysroot for Windows
+
 about:
   home: https://github.com/conda-forge/m2w64-gcc-feedstock
   summary: Repackaged mingw-w64 binaries
