@@ -11,11 +11,13 @@ import os
 import shutil
 from ordered_set import OrderedSet as set
 
-date = "20230914"
+date = "20240524"
 binary_index_url = (
+    #"https://repo.msys2.org/mingw/ucrt64/"
     f"https://github.com/conda-forge/msys2-recipes/releases/download/{date}-ucrt64/"
 )
 source_url = (
+    #"https://repo.msys2.org/mingw/sources/"
     f"https://github.com/conda-forge/msys2-recipes/releases/download/{date}-ucrt64/"
 )
 
@@ -192,7 +194,7 @@ for pkg, (depends, spdx, desc, url, src_url) in seen.items():
                 .decode("utf-8")
                 .split(" ")[0]
             )
-            msys_type = "x86_64"
+            msys_type = "ucrt64"
             url_base = f"{pkg}-{info}"
 
         info = {
