@@ -181,10 +181,12 @@ outputs:
       home: https://mingw-w64.sourceforge.io/
       summary: |
         MinGW-w64 sysroot for Windows
+      license: ZPL-2.1 AND LGPL-2.1-or-later and MIT AND BSD-3-Clause-Clear
 
 about:
   home: https://github.com/conda-forge/m2w64-gcc-feedstock
   summary: Repackaged mingw-w64 binaries
+  license: ZPL-2.1 AND LGPL-2.1-or-later and MIT AND BSD-3-Clause-Clear
 
 extra:
   recipe-maintainers:

@@ -9,7 +9,7 @@ About m2w64-gcc
 
 Home: https://github.com/conda-forge/m2w64-gcc-feedstock
 
-Package license: 
+Package license: ZPL-2.1 AND LGPL-2.1-or-later and MIT AND BSD-3-Clause-Clear
 
 Summary: Repackaged mingw-w64 binaries
 
@@ -68,7 +68,7 @@ About m2w64-sysroot_win-64
 
 Home: https://mingw-w64.sourceforge.io/
 
-Package license: 
+Package license: ZPL-2.1 AND LGPL-2.1-or-later and MIT AND BSD-3-Clause-Clear
 
 Summary: MinGW-w64 sysroot for Windows
 
