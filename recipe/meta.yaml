@@ -64,7 +64,7 @@ source:
     folder: source-mingw-w64-ucrt-x86_64-crt-git
 
 build:
-  number: 4
+  number: 5
   error_overlinking: false
 
 outputs:
