@@ -218,7 +218,7 @@ meta += "".join(sources.keys())
 
 meta += """
 build:
-  number: 4
+  number: 5
   error_overlinking: false
 
 outputs:"""
